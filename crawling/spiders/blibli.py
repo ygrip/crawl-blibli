@@ -6,6 +6,7 @@ import pickle
 import scrapy
 import lxml.html
 import urllib.parse
+import scrapy_splash
 from collections import defaultdict
 from scrapy.selector import Selector
 from scrapy.http import HtmlResponse
@@ -168,8 +169,20 @@ class BliBliSpider(scrapy.Spider):
             if list_url_product is not None:
                 for url_product in list_url_product:                    
                     url = url_product
-                    url_product = "http://192.168.99.100:8050/render.html?" + urllib.parse.urlencode({ 'url' : url_product})
-                    product_request = scrapy.Request(url=url_product,callback=self.parse_page)
+                    # url_product = "http://192.168.99.100:8050/render.html?" + urllib.parse.urlencode({ 'url' : url_product})
+                    product_request = scrapy.Request(url_product,self.parse_page,meta={
+                                'splash' : {
+                                        'args' : {
+                                                'html' : 1,
+                                                'url' : url_product,
+                                                'http_method' : 'GET',
+                                        },
+                                        'timeout' : 3600,
+                                        'endpoint' : 'render.html',
+                                        'splash_url' : 'http://192.168.99.100:8050/',
+                                        'slot_policy' : scrapy_splash.SlotPolicy.PER_DOMAIN,
+                                }
+                        })
                     product_request.meta['proxy'] = ''
                     product_request.meta['dont_obey_robotstxt'] = True
                     product_request.meta['url_product'] = url
