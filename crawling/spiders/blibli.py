@@ -177,7 +177,6 @@ class BliBliSpider(scrapy.Spider):
                                                 'url' : url_product,
                                                 'http_method' : 'GET',
                                         },
-                                        'timeout' : 3600,
                                         'endpoint' : 'render.html',
                                         'splash_url' : 'http://192.168.99.100:8050/',
                                         'slot_policy' : scrapy_splash.SlotPolicy.PER_DOMAIN,
