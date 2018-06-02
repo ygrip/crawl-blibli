@@ -1,0 +1,59 @@
+[
+    {
+        "brand": "Xiaomi",
+        "brand_image": "https://www.static-src.com/wcsstore/Indraprastha//images/brandlogo/BR-M036969-03591/xiaomi-logo.jpg",
+        "produk_url": "https://www.blibli.com/p/xiaomi-mi-2-powerbank-silver-10000mah-garansi-resmi/ps--BLH-15012-08799?ds=BLH-15012-08799-00001&list=Product Listing Page",
+        "brand_link": "https://www.blibli.com/anchor/xiaomi",
+        "title": "Xiaomi Mi 2 Powerbank - Silver [10000mAh] Garansi Resmi",
+        "category": [
+            "Handphone & Tablet",
+            "Aksesoris Handphone & Tablet"
+        ],
+        "harga": {
+            "Harga awal": 249000,
+            "Harga": 188000,
+            "Diskon": 24.5
+        },
+        "produk_features": [
+            "Powerbank",
+            "Kapasitas : 10000mAh 3.85V (38.5Wh)",
+            "Battery Type : Lithium polymer batteries",
+            "Fast Charging",
+            "Material : Aluminium Alloy"
+        ],
+        "produk_services": [
+            "Garansi:",
+            "15 hari Pengembalian Produk",
+            "Tersedia Cash On Delivery"
+        ],
+        "produk_description": "Xiaomi Mi 2 Powerbank - Silver [10000mAh] merupakan powerbank terbaru dari versi sebelumnya, karena memiliki ukuran yang lebih tipis dengan kapasitas yang sama. Dibuat dari bahan berkualitas dan chip kelas dunia, membuat powerbank ini cukup aman untuk mengisi semua perangkat Anda. Powerbank ini didukung fitur fast charging dengan 2 pilihan. Jika Anda memiliki perangkat yang berdaya rendah, cukup menekan double power untuk melakukan pengisian rendah sehingga perangkat Anda tetap aman.  ",
+        "produk_specification": {
+            "Brand": "Xiaomi",
+            "Kapasitas": "1000mAh",
+            "Input": "5.0V2.0A, 9V/12V18W",
+            "Output": "5.1V2.4A 9V/12V15W MAX",
+            "Lama Pengisian": null,
+            "Konektivitas": null,
+            "Dimensi Produk": "130 x 71 x 14.1 mm",
+            "Berat": "0.250 kg",
+            "Kelengkapan Paket": "1pc  Xiaomi 2 Powerbank 10000 mAh",
+            "Lain-lain": null
+        },
+        "produk_code": {
+            "SKU Number": "BLH-15012-08799",
+            "Product Code": "MTA-1426587",
+            "EAN Code": "01170927141303782"
+        },
+        "url_images": [
+            "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/thumbnail/MTA-1426587/xiaomi_xiaomi-mi-2-powerbank---silver--10000mah-_full03.jpg",
+            "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/thumbnail/MTA-1426587/xiaomi_xiaomi-mi-2-powerbank---silver--10000mah-_full04.jpg",
+            "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/thumbnail/MTA-1426587/xiaomi_xiaomi-mi-2-powerbank---silver--10000mah-_full05.jpg"
+        ],
+        "shipping_option": {
+            "name": "Ekspres",
+            "image": "https://www.static-src.com/siva/asset//04_2017/express_shipping.png",
+            "price": 18180
+        },
+        "merchant_location": "Kota Jakarta Barat, DKI Jakarta"
+    }
+]

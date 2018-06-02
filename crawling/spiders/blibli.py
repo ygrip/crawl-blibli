@@ -36,18 +36,20 @@ class BliBliSpider(scrapy.Spider):
             'https://www.blibli.com/tablet/54593'
             ]
 
+    def start_requests(self):
+        self.logger.info('current working directory is : %s' % os.getcwd())
+        
+        for url in self.list_urls:
+            proxy_meta = ''
+            request = scrapy.Request(url=url, callback=self.parse)
+            request.meta['proxy'] = proxy_meta
+            request.meta['pages'] = 0
+            yield request
+
     def as_python_object(self,dct):
         if '_python_object' in dct:
             return pickle.loads(str(dct['_python_object']))
         return dct
-
-    def getselector(self,getter):
-        try:
-            expression = GenericTranslator().css_to_xpath(getter)
-            return expression
-        except SelectorError:
-            self.logger.info('Invalid selector')
-            return None
 
     def translatespecification(self,table):
         cleanr = re.compile('<.*?>')
@@ -111,16 +113,6 @@ class BliBliSpider(scrapy.Spider):
             if shipment['name'] and shipment['image']:
                 result.update(shipment)
         return result
-
-    def start_requests(self):
-        self.logger.info('current working directory is : %s' % os.getcwd())
-        
-        for url in self.list_urls:
-            proxy_meta = ''
-            request = scrapy.Request(url=url, callback=self.parse)
-            request.meta['proxy'] = proxy_meta
-            request.meta['pages'] = 0
-            yield request
 
     def parse_page(self, response):
         filename = response.meta['filepath']
