@@ -21,24 +21,23 @@ NEWSPIDER_MODULE = 'crawling.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 AUTOTHROTTLE_ENABLED =  True
-AUTOTHROTTLE_START_DELAY = 1
-AUTOTHROTTLE_MAX_DELAY = 10
-# DOWNLOAD_DELAY = 0
+AUTOTHROTTLE_START_DELAY = 5
+AUTOTHROTTLE_MAX_DELAY = 60
+# DOWNLOAD_DELAY = 1
 LOG_LEVEL = 'INFO'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 5
+CONCURRENT_REQUESTS = 32
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 #DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
-# CONCURRENT_REQUESTS_PER_DOMAIN = 3
-# CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 8
 
 # Disable cookies (enabled by default)
-# COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 TELNETCONSOLE_ENABLED = False
@@ -51,20 +50,23 @@ TELNETCONSOLE_ENABLED = False
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-SPIDER_MIDDLEWARES = {
-   'crawling.middlewares.CrawlingSpiderMiddleware': 543,
-   'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
-}
+# SPIDER_MIDDLEWARES = {
+   # 'crawling.middlewares.CrawlingSpiderMiddleware': 543,
+   # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+# }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
-}
+# DOWNLOADER_MIDDLEWARES = {
+    # 'scrapy_splash.SplashCookiesMiddleware': 723,
+    # 'scrapy_splash.SplashMiddleware': 725,
+    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+    # 'scrapy.downloadermiddlewares.stats.DownloaderStats': 850,
+# }
 
-DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+# DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+USER_AGENT = 'blibli-crawler (yunaz.gilang@gmail.com)'
+# USER_AGENT = None
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -91,10 +93,18 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = 2.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
 
+REACTOR_THREADPOOL_MAXSIZE = 20
+# RETRY_ENABLED = False
+# DOWNLOAD_TIMEOUT = 10
+REDIRECT_ENABLED = False
+# AJAXCRAWL_ENABLED = True
+
 # Enable and configure HTTP caching (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
 # HTTPCACHE_ENABLED = True
-# HTTPCACHE_EXPIRATION_SECS = 5
+# HTTPCACHE_EXPIRATION_SECS = 30
 # HTTPCACHE_DIR = 'httpcache'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# SPLASH_URL = 'http://0.0.0.0:8050/'

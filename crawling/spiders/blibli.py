@@ -17,7 +17,9 @@ class BliBliSpider(scrapy.Spider):
     name = "blibli"
     PAGE_LIMIT = 10
     output_path = 'output/blibli/'
-    list_urls = ['https://www.blibli.com/coffee-maker/54650',
+    proxy_meta = ''
+    list_urls = [
+            'https://www.blibli.com/coffee-maker/54650',
             'https://www.blibli.com/televisi/54650',
             'https://www.blibli.com/perangkat-kecantikan/54650',
             'https://www.blibli.com/perlengkapan-elektronik-dapur/54650',
@@ -41,9 +43,8 @@ class BliBliSpider(scrapy.Spider):
         self.logger.info('current working directory is : %s' % os.getcwd())
         
         for url in self.list_urls:
-            proxy_meta = ''
             request = scrapy.Request(url=url, callback=self.parse)
-            request.meta['proxy'] = proxy_meta
+            request.meta['proxy'] = self.proxy_meta
             request.meta['pages'] = 0
             yield request
 
@@ -62,7 +63,8 @@ class BliBliSpider(scrapy.Spider):
             value = re.sub(cleanr, '', allcols[1].text_content())
             value = value if value else None
             value = None if value == '-' else value
-            result[label] = value
+            if value:
+                result[label] = value
         return result
 
     def translateprice(self,price_info):
@@ -85,9 +87,7 @@ class BliBliSpider(scrapy.Spider):
                 diff_price.append(value)
 
         if len(diff_price) > 1:
-            elements['Diskon'] = round((abs(diff_price[0] - diff_price[1]))/diff_price[0] * 100,1)
-        else:
-            elements['Diskon'] = 0.0
+            elements['Diskon'] = round((abs(diff_price[0] - diff_price[1]))/diff_price[0] * 100,0)
         return elements
 
     def translatecode(self, produk_code):
@@ -169,21 +169,29 @@ class BliBliSpider(scrapy.Spider):
             if list_url_product is not None:
                 for url_product in list_url_product:                    
                     url = url_product
-                    # url_product = "http://192.168.99.100:8050/render.html?" + urllib.parse.urlencode({ 'url' : url_product})
-                    product_request = scrapy.Request(url_product,self.parse_page,meta={
-                                'splash' : {
-                                        'args' : {
-                                                'html' : 1,
-                                                'url' : url_product,
-                                                'http_method' : 'GET',
-                                        },
-                                        'endpoint' : 'render.html',
-                                        'splash_url' : 'http://192.168.99.100:8050/',
-                                        'slot_policy' : scrapy_splash.SlotPolicy.PER_DOMAIN,
-                                }
-                        })
-                    product_request.meta['proxy'] = ''
-                    product_request.meta['dont_obey_robotstxt'] = True
+                    url_product = "http://localhost:8050/render.html?" + urllib.parse.urlencode({ 'url' : url_product}) + '&timeout=300'
+                    # product_request = scrapy.Request(url=url,callback=self.parse_page,meta={
+                    #             'splash' : {
+                    #                     'args' : {
+                    #                             'html' : 1,
+                    #                             'http_method' : 'GET',
+                    #                             'timeout' : 300,
+                    #                             'wait' : 5,
+                    #                             'resource_timeout ' : 60,
+                    #                             # 'set_viewport_full' : True,
+                    #                     },
+                    #                     'endpoint' : 'render.html',
+                    #                     'dont_process_response': True,
+                    #                     'magic_response': False,
+                    #                     'plugins_enabled' :False,
+                    #                     'media_source_enabled' : False,
+                    #                     'slot_policy': scrapy_splash.SlotPolicy.SINGLE_SLOT,
+                    #             } 
+                    #     })
+                    product_request = scrapy.Request(method='GET',url=url_product,callback=self.parse_page)
+                    product_request.meta['proxy'] = self.proxy_meta
+                    product_request.meta['download_timeout'] = 90
+                    # product_request.meta['dont_obey_robotstxt'] = True
                     product_request.meta['url_product'] = url
                     product_request.meta['filepath'] = filename
                     yield product_request
